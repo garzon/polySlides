@@ -1,0 +1,357 @@
+<<<<<<< HEAD
+<!doctype html>
+<html>
+
+<head>
+
+  <title>polySlides</title>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="components/platform/platform.js"></script>
+  <script src="jquery.min.js"></script>
+
+  <link rel="import" href="components/core-item/core-item.html">
+  <link rel="import" href="components/core-menu/core-menu.html">
+  <link rel="import" href="components/core-header-panel/core-header-panel.html">
+  <link rel="import" href="components/core-icon-button/core-icon-button.html">
+  <link rel="import" href="components/core-toolbar/core-toolbar.html">
+
+  <link rel="import" href="components/polyslides/polyslides-cover.html">
+  <link rel="import" href="components/polyslides/polyslides-default.html">
+
+  <style>
+    .dark {
+      background-color: #333;
+      padding-right: 30px;
+    }
+
+    .dark core-item {
+      color: #fafafa;
+      fill: #fafafa;
+    }
+    html,body, .globalContainer {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      background-color: #E5E5E5;
+      font-family: 'Calibri', sans-serif;
+    }
+    core-header-panel {
+      height: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch; 
+    }
+    core-toolbar {
+      background: #03a9f4;
+      color: white;
+    }
+    .container {
+      width: 80%;
+      height: 80%;
+      margin: 50px auto;
+    }
+    @media (min-width: 481px) {
+      .container {
+        width: 400px;
+        height: 100%;
+      }
+    }
+    .timebox {
+      width: 80%;
+      text-align: right;
+    }
+  </style>
+
+</head>
+
+<body unresolved>
+
+  <core-header-panel>
+    <div layout horizontal>
+      <div class="dark">
+        <core-menu id="menu" selected="0">
+        </core-menu>
+      </div>
+      <div class="globalContainer">
+        <core-toolbar>
+          <div style="width:100%" layout horizontal center>
+            <div layout horizontal center>
+              <core-icon-button icon="chevron-left" onclick="window.prev()"></core-icon-button>
+              <p>polySlides</p>
+              <core-icon-button icon="chevron-right" onclick="window.next()"></core-icon-button>
+            </div>
+            <div class="timebox" id="show_time">
+              00:00:00
+            </div>
+          </div>
+        </core-toolbar>
+        <div class="container" id="container" layout vertical center onclick="window.next()"></div>
+      </div>
+    </div>
+  </core-header-panel>
+
+
+  <script>
+    window.ele=[];
+    window.counter=0;
+    window.max=0;
+    window.show=function(id){
+      counter=id;
+      var body=document.querySelector("#container");
+      body.innerHTML="";
+      body.appendChild(ele[id]);
+      document.querySelector("#menu").selected=id;
+    }
+    window.next=function(){
+      if(counter===max) return;
+      counter+=1;
+      show(counter);
+    }
+    window.prev=function(){
+      if(counter===0) return;
+      counter-=1;
+      show(counter);
+    }
+    window.loadData=function(data){
+      data=eval(data);
+      max=-1;
+      var menu=document.querySelector("#menu");
+      for(i in data){
+        var title="";
+        if(data[i].length===1){
+          data[i].push(data[i][0]);
+          data[i][0]="default";
+        }
+        var element=document.createElement("polyslides-"+data[i][0]);
+        ele.push(element); 
+        var slideData=data[i][1];
+        for(j in slideData){
+          var nodeType="p"; // default 
+          var inner;
+          if(slideData[j].length!==1){
+            nodeType=slideData[j][0];
+            inner=slideData[j][1];
+          }else{
+            inner=slideData[j][0];
+          }
+          if(nodeType==="h1"){
+            title=inner;
+          }
+          var node=document.createElement(nodeType);
+          element.appendChild(node);
+          if((nodeType!="img") && (nodeType !="iframe") && (nodeType !="a")){
+            node.innerHTML=inner;
+          }else{
+            node.src="slides/"+inner;
+          }
+        }
+        var slideItem=document.createElement("core-item");
+        menu.appendChild(slideItem);
+        max+=1;
+        if(title.length>13) {
+          title=title.substr(0,12)+"..";
+        }
+        slideItem.setAttribute("label",title);
+        slideItem.setAttribute("onclick","window.show("+max+")");
+      }
+      counter=0;
+      show(counter);
+    }
+    trim=function(t){
+      if(t<10) t="0"+t;
+      return t;
+    }
+    $(document).ready(function(){
+      $.get("slides/slides.json",function(data){
+        loadData(data);
+      });
+      window.setInterval(function(){
+        var date=new Date();
+        document.getElementById("show_time").innerHTML=trim(date.getHours())+":"+trim(date.getMinutes())+":"+trim(date.getSeconds());
+      },1000);
+    });
+  </script>
+	  
+</body>
+
+</html>
+=======
+<!doctype html>
+<html>
+
+<head>
+
+  <title>polySlides</title>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="components/platform/platform.js"></script>
+  <script src="jquery.min.js"></script>
+
+  <link rel="import" href="components/core-item/core-item.html">
+  <link rel="import" href="components/core-menu/core-menu.html">
+  <link rel="import" href="components/core-header-panel/core-header-panel.html">
+  <link rel="import" href="components/core-icon-button/core-icon-button.html">
+  <link rel="import" href="components/core-toolbar/core-toolbar.html">
+
+  <link rel="import" href="components/polyslides/polyslides-cover.html">
+  <link rel="import" href="components/polyslides/polyslides-default.html">
+
+  <style>
+    .dark {
+      background-color: #333;
+      padding-right: 30px;
+    }
+
+    .dark core-item {
+      color: #fafafa;
+      fill: #fafafa;
+    }
+    html,body, .globalContainer {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      background-color: #E5E5E5;
+      font-family: 'Calibri', sans-serif;
+    }
+    core-header-panel {
+      height: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch; 
+    }
+    core-toolbar {
+      background: #03a9f4;
+      color: white;
+    }
+    .container {
+      width: 80%;
+      height: 80%;
+      margin: 50px auto;
+    }
+    @media (min-width: 481px) {
+      .container {
+        width: 400px;
+        height: 100%;
+      }
+    }
+    .timebox {
+      width: 80%;
+      text-align: right;
+    }
+  </style>
+
+</head>
+
+<body unresolved>
+
+  <core-header-panel>
+    <div layout horizontal>
+      <div class="dark">
+        <core-menu id="menu" selected="0">
+        </core-menu>
+      </div>
+      <div class="globalContainer">
+        <core-toolbar>
+          <div style="width:100%" layout horizontal center>
+            <div layout horizontal center>
+              <core-icon-button icon="chevron-left" onclick="window.prev()"></core-icon-button>
+              <p>polySlides</p>
+              <core-icon-button icon="chevron-right" onclick="window.next()"></core-icon-button>
+            </div>
+            <div class="timebox" id="show_time">
+              00:00:00
+            </div>
+          </div>
+        </core-toolbar>
+        <div class="container" id="container" layout vertical center onclick="window.next()"></div>
+      </div>
+    </div>
+  </core-header-panel>
+
+
+  <script>
+    window.ele=[];
+    window.counter=0;
+    window.max=0;
+    window.show=function(id){
+      counter=id;
+      var body=document.querySelector("#container");
+      body.innerHTML="";
+      body.appendChild(ele[id]);
+      document.querySelector("#menu").selected=id;
+    }
+    window.next=function(){
+      if(counter===max) return;
+      counter+=1;
+      show(counter);
+    }
+    window.prev=function(){
+      if(counter===0) return;
+      counter-=1;
+      show(counter);
+    }
+    window.loadData=function(data){
+      data=eval(data);
+      max=-1;
+      var menu=document.querySelector("#menu");
+      for(i in data){
+        var title="";
+        if(data[i].length===1){
+          data[i].push(data[i][0]);
+          data[i][0]="default";
+        }
+        var element=document.createElement("polyslides-"+data[i][0]);
+        ele.push(element); 
+        var slideData=data[i][1];
+        for(j in slideData){
+          var nodeType="p"; // default 
+          var inner;
+          if(slideData[j].length!==1){
+            nodeType=slideData[j][0];
+            inner=slideData[j][1];
+          }else{
+            inner=slideData[j][0];
+          }
+          if(nodeType==="h1"){
+            title=inner;
+          }
+          var node=document.createElement(nodeType);
+          element.appendChild(node);
+          if((nodeType!="img") && (nodeType !="iframe")){
+            node.innerHTML=inner;
+          }else{
+            node.src="slides/"+inner;
+          }
+        }
+        var slideItem=document.createElement("core-item");
+        menu.appendChild(slideItem);
+        max+=1;
+        if(title.length>13) {
+          title=title.substr(0,12)+"..";
+        }
+        slideItem.setAttribute("label",title);
+        slideItem.setAttribute("onclick","window.show("+max+")");
+      }
+      counter=0;
+      show(counter);
+    }
+    trim=function(t){
+      if(t<10) t="0"+t;
+      return t;
+    }
+    $(document).ready(function(){
+      $.get("slides/slides.json",function(data){
+        loadData(data);
+      });
+      window.setInterval(function(){
+        var date=new Date();
+        document.getElementById("show_time").innerHTML=trim(date.getHours())+":"+trim(date.getMinutes())+":"+trim(date.getSeconds());
+      },1000);
+    });
+  </script>
+	  
+</body>
+
+</html>
+>>>>>>> fa177ce61d5847a581f3b872843cd5222ccf8526

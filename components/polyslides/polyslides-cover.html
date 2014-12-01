@@ -1,0 +1,28 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<polymer-element name="polyslides-cover">
+  <template>
+    <link rel="stylesheet" href="polyslides.css" type="text/css">
+    <style>
+      polyfill-next-selector { content: '.slide-cover-title h1'; }
+        .slide-cover-title ::content h1 {
+        vertical-align: middle;
+        line-height: 500px;
+        height: 100%;
+      }
+    </style>
+    <div class="slide" layout vertical>
+      <div class="slide-cover-title">
+        <content select="h1"></content>
+      </div>
+      <div class="slide-footer" layout vertical right>
+          <content></content>   
+      </div>
+    </div>
+    
+  </template>
+  <script>
+  Polymer({});
+  </script>
+</polymer-element>
+

@@ -1,0 +1,38 @@
+[
+    [
+        "cover",
+        [
+            ["h1","Tracking the Articulated Motion of Hands"],
+            ["Garzon Ou"],
+            ["13307130320@fudan.edu.cn"],
+            ["Fudan University"]
+        ]
+    ],
+
+    [
+        [
+            ["h1", "Problem"],
+            ["Tracking"],
+            ["img","images/Tracking.jpg"]
+        ]
+    ],
+
+    [
+        [
+            ["h1","Data"],
+            ["RGB-D Image"],
+            ["img","images/RGBD.jpg"]
+        ]
+    ],
+
+
+    [
+        [
+            ["h1","References"],
+            ["I. Oikonomidis, N. Kyriazis, A.A. Argyros. Tracking the Articulated Motion of Two Strongly Interacting Hands. CVPR2012"],
+            ["Chen Qian, et al. Realtime and Robust Hand Tracking from Depth. CVPR2014"],
+            ["I.Oikonomidis, N.Kyriazis, and A.A.Argyros. Efficient model-based tracking of hand articulations using kinect. In BMVC, 2011."]
+        ]
+    ]
+
+]

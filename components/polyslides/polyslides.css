@@ -1,0 +1,42 @@
+:host {
+      display: block;
+      position: relative;
+      background-color: white;
+      padding: 20px;
+      width: 800px;
+      height: 700px;
+      font-size: 1.2rem;
+      font-weight: 300;
+}
+
+.slide {
+      height: 100%;
+}
+
+.slide-cover-title {
+      margin: 20px;
+      text-align: center;
+      vertical-align: middle;
+      width: 100%;
+      height: 100%;
+}
+
+.slide-default-title {
+      margin: 20px;
+      text-align: left;
+      vertical-align: top;
+      width: 100%;
+}
+
+.slide-text {
+      margin-left: 40px;
+      font-size: 30px;
+}
+
+.slide-footer {
+      margin-right: 40px;
+      margin-bottom: 200px;
+      line-height: 5px;
+      text-align: right;
+      vertical-align: bottom;
+}
