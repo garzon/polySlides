@@ -95,12 +95,42 @@
     window.ele=[];
     window.counter=0;
     window.max=0;
+    window.slideSpecialEffects=function(ele, delta, time, callback){
+      if(typeof ele=='undefined'){
+        callback();
+        return;
+      }
+      var newValue=ele.style.opacity-(-delta);
+      console.log(newValue);
+      if((newValue>1)||(newValue<0)){
+        if(newValue>1){
+          newValue=1;
+        }else{
+          newValue=0;
+        }
+        ele.style.opacity=newValue;
+        callback();
+        return;
+      }
+      ele.style.opacity=newValue;
+      window.setTimeout(
+        function(){
+          slideSpecialEffects(ele, delta, time, callback);
+        },
+        time
+      );
+    }
     window.show=function(id){
       counter=id;
       var body=document.querySelector("#container");
-      body.innerHTML="";
-      body.appendChild(ele[id]);
-      document.querySelector("#menu").selected=id;
+      var slide=body.childNodes[0];
+
+      slideSpecialEffects(slide, -0.05, 20, function(){ 
+        body.innerHTML="";
+        body.appendChild(ele[id]); 
+        slideSpecialEffects(ele[id], 0.05, 20, function(){ document.querySelector("#menu").selected=id; }); 
+      });
+
     }
     window.next=function(){
       if(counter===max) return;
@@ -123,6 +153,7 @@
           data[i][0]="default";
         }
         var element=document.createElement("polyslides-"+data[i][0]);
+        element.style.opacity=0;
         ele.push(element); 
         var slideData=data[i][1];
         for(j in slideData){
