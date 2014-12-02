@@ -145,22 +145,33 @@
       if(counter===0) return;
       show(counter-1);
     }
+    window.getConfig=function(default_config, custom_config){
+      var res={};
+      for(i in default_config) res[i]=default_config[i];
+      for(i in custom_config) res[i]=custom_config[i];
+      return res;
+    }
     window.loadData=function(data){
+
       data=eval(data);
       max=-1;
       var menu=document.querySelector("#menu");
-      for(i in data){
+
+      var global_config=getConfig({ background: "#FFFFFF", template: "default" },data[0]);
+      var local_config;
+
+      for(var i=1;i<data.length;i++){ // foreach slide
+
         var title="";
-        if(data[i].length===1){
-          data[i].push(data[i][0]);
-          data[i][0]="default";
-        }
-        var element=document.createElement("polyslides-"+data[i][0]);
+        local_config=getConfig(global_config, data[i][0]);
+        var element=document.createElement("polyslides-"+local_config.template);
         element.style.opacity=0;
+        element.style.background=local_config.background;
         ele.push(element); 
         var slideData=data[i][1];
-        for(j in slideData){
-          var nodeType="p"; // default 
+
+        for(j in slideData){ // foreach node in slide
+          var nodeType="p";  // the default node type is "p"
           var inner;
           if(slideData[j].length!==1){
             nodeType=slideData[j][0];
@@ -179,6 +190,8 @@
             node.src="slides/"+inner;
           }
         }
+
+        // update menu
         var slideItem=document.createElement("core-item");
         menu.appendChild(slideItem);
         max+=1;
@@ -187,23 +200,29 @@
         }
         slideItem.setAttribute("label",title);
         slideItem.setAttribute("onclick","window.show("+max+")");
+
       }
+
+      // render the first slide
       counter=0;
       show(counter);
+
     }
-    trim=function(t){
-      if(t<10) t="0"+t;
-      return t;
-    }
+    
     $(document).ready(function(){
       $.get("slides/slides.json",function(data){
         loadData(data);
       });
       window.setInterval(function(){
         var date=new Date();
+        var trim=function(t){
+          if(t<10) t="0"+t;
+          return t;
+        }
         document.getElementById("show_time").innerHTML=trim(date.getHours())+":"+trim(date.getMinutes())+":"+trim(date.getSeconds());
       },1000);
     });
+
   </script>
 	  
 </body>

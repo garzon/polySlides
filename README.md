@@ -13,9 +13,10 @@ You just need to modify /slides/slides.json, all attachments can be placed at /s
 
 ### Format
 
-/slides/slides.json (<a href="https://github.com/garzon/polySlides/blob/master/slides/slides.json">Example</a>):
+/slides/slides.json (<a href="https://github.com/garzon/polySlides/blob/gh-pages/slides/slides.json">Example</a>):
 ```
 [  
+   global_config,
    slide1,  
    slide2,  
    ...  
@@ -25,7 +26,7 @@ You just need to modify /slides/slides.json, all attachments can be placed at /s
 where the structure of slide1, slide2... is
 ```
 [  
-   TEMPLATE_NAME,  
+   local_config,  
    [node1, node2, node3...]  
 ]
 ```
@@ -38,8 +39,23 @@ And the structure of the node1, node2... is
 ] 
 ```
 
-- TEMPLATE_NAME (optional, "default" is default): decides which template is to used to render the slide, the template html files are located at /components/polyslides/ployslides-TEMPLATE_NAME.html
+- ```TAG_NAME``` (optional, "p" is default): same as HTML. If it's "h1", INNER_HTML will also be the title of the slide.
 
-- TAG_NAME (optional, "p" is default): same as HTML. If it's "h1", INNER_HTML will also be the title of the slide.
+- ```INNER_HTML```: the ```.innerHTML``` attribute of the HTML tag, BUT if ```TAG_NAME``` is ```img``` or ```iframe``` or ```a```, it would be the ```.src``` attribute of the tag, indicating the file to be included.
 
-- INNER_HTML: the .innerHTML attribute of the HTML tag, BUT if TAG_NAME is "img" or "iframe" or "a", it would be the .src attribute of the tag, indicates the file to be included.
+And the structure of config (global_config and local_config) is
+
+```
+{
+	template: TEMPLATE_NAME,
+	background: BACKGROUND
+}
+```
+
+The default config is { background: "#FFFFFF", template: "default", music: "" },
+this will be overwritten by global_config,
+and the global_config will be overwritten by local_config, too.
+
+- ```TEMPLATE_NAME```: decides which template is to used to render the slide, the template html files are located at /components/polyslides/ployslides-```TEMPLATE_NAME```.html
+
+- ```BACKGROUND```: the background attribute of the css of the slide
