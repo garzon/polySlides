@@ -2,10 +2,10 @@
     { 
         background: "url(/slides/images/bg_test.jpg)",
         template: "default"
-    }, // global_config
+    },
 
     [
-        { template: "cover" }, // local_config
+        { template: "cover" },
         [
             ["h1","Tracking the Articulated Motion of Hands"],
             ["Garzon Ou"],
