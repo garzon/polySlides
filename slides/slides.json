@@ -1,6 +1,6 @@
 [
     { 
-        "background": "url(/slides/images/bg_test.jpg)",
+        "background": "url(slides/images/bg_test.jpg)",
         "template": "default"
     },
 
