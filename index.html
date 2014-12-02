@@ -95,6 +95,7 @@
     window.ele=[];
     window.counter=0;
     window.max=0;
+    window.is_show_valid=true;
     window.slideSpecialEffects=function(ele, delta, time, callback){
       if(typeof ele=='undefined'){
         callback();
@@ -120,14 +121,19 @@
       );
     }
     window.show=function(id){
+      if(!is_show_valid) return;
+      is_show_valid=false;
       counter=id;
       var body=document.querySelector("#container");
       var slide=body.childNodes[0];
 
-      slideSpecialEffects(slide, -0.05, 20, function(){ 
+      slideSpecialEffects(slide, -0.1, 20, function(){ 
         body.innerHTML="";
         body.appendChild(ele[id]); 
-        slideSpecialEffects(ele[id], 0.05, 20, function(){ document.querySelector("#menu").selected=id; }); 
+        slideSpecialEffects(ele[id], 0.1, 20, function(){ 
+          document.querySelector("#menu").selected=id; 
+          is_show_valid=true;
+        }); 
       });
 
     }
