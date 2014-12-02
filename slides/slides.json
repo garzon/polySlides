@@ -19,7 +19,7 @@
         [
             ["h1", "Problem"],
             ["Tracking"],
-            ["img","images/Tracking.jpg"]
+            ["img","slides/images/Tracking.jpg"]
         ]
     ],
 
@@ -28,7 +28,7 @@
         [
             ["h1","Data"],
             ["RGB-D Image"],
-            ["img","images/RGBD.jpg"]
+            ["img","slides/images/RGBD.jpg"]
         ]
     ],
 
