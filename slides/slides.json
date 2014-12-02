@@ -1,11 +1,11 @@
 [
     { 
-        background: "url(/slides/images/bg_test.jpg)",
-        template: "default"
+        "background": "url(/slides/images/bg_test.jpg)",
+        "template": "default"
     },
 
     [
-        { template: "cover" },
+        { "template": "cover" },
         [
             ["h1","Tracking the Articulated Motion of Hands"],
             ["Garzon Ou"],
@@ -34,7 +34,7 @@
 
 
     [
-        { background: "#FFFFFF" },
+        { "background": "#FFFFFF" },
         [
             ["h1","References"],
             ["I. Oikonomidis, N. Kyriazis, A.A. Argyros. Tracking the Articulated Motion of Two Strongly Interacting Hands. CVPR2012"],
