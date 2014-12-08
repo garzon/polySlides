@@ -1,7 +1,8 @@
 [
     { 
         "background": "url(slides/images/bg_test.jpg)",
-        "template": "default"
+        "template": "default",
+        "next": "+1"
     },
 
     [
@@ -31,6 +32,83 @@
             ["img","slides/images/RGBD.jpg"]
         ]
     ],
+
+    [
+        {},
+        [
+            ["h1","Model"],
+            ["img","slides/images/Model.jpg"],
+            ["Each part of the model corresponding to some spheres in the same color"]
+        ]
+    ],
+
+    [
+        {},
+        [
+            ["h1","Cost Function"],
+            ["img","slides/images/Cost.jpg"],
+            ["where   o: observation,  r: rendered image,  s: skin map,  d: depth map"]
+        ]
+    ],
+
+    [
+        { 
+            "js": "slides/iframes/pso/pso_script.html",
+            "next": "=" 
+        },
+        [
+            ["h1","PSO (Particle Swarm Optimization)"],
+            ["iframe","slides/iframes/pso/pso.html"]
+        ]
+    ],  
+
+    [
+        {},
+        [
+            ["h1","Formula of PSO"],
+            ["img","slides/images/PSO_formula.jpg"],
+            ["Same as"],
+            ["img","slides/images/PSO_avp.gif"]
+        ]
+    ],  
+
+    [
+        {},
+        [
+            ["h1","PSO with k-means"],
+            ["img","slides/images/PSO_kmeans.jpg"]
+        ]
+    ],  
+
+    [
+        {},
+        [
+            ["h1","ICP (Iterative Closest Point)"]
+        ]
+    ],
+
+    [
+        {},
+        [
+            ["h1","Transform Matrix"]
+        ]
+    ],  
+
+    [
+        {},
+        [
+            ["h1","AICP (Articulated ICP)"]
+        ]
+    ],  
+
+    [
+        {},
+        [
+            ["h1","Sketch"],
+            ["img","slides/images/Sketch.jpg"]
+        ]
+    ],  
+
 
 
     [

@@ -1,0 +1,93 @@
+<script>
+
+	window.bound_x=[-5,5];
+	window.bound_y=[-5,5];
+	window.h=document.getElementById("myCanvas").height;
+	window.w=document.getElementById("myCanvas").width;
+
+	window.map=function(val,oria,orib,newa,newb){
+		return (val-oria)*1.0/(orib-oria)*(newb-newa)+newa;
+	}
+
+</script>
+
+<script src="vector.js"> </script>
+<script src="arrow.js"> </script>
+
+<script>
+
+window.drawArrow=function(ctx, p, dir){
+	var a1=new window.mapleque.arrow();
+	a1.set({x:p.x,y:p.y},{x:dir.x,y:dir.y});
+	a1.paint(ctx);	
+}
+
+window.drawPoint=function(ctx, p, color){
+	ctx.fillStyle=color;
+	ctx.beginPath();
+	ctx.arc(p.x,p.y,4,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+}
+
+</script>
+
+<script src="particle.js"> </script>
+
+<script>
+
+var ctx, particles=[], particlesNum=10, best, mincost, histBest, histMinCost=99999999;
+var Fcenters=[];
+
+window.findBest=function(){
+	mincost=99999999;
+	for(i in particles){
+		if(particles[i].cost<mincost){
+			mincost=particles[i].cost;
+			best=particles[i];
+		}
+	}
+	if(best.cost<histMinCost){
+		histMinCost=best.cost;
+		histBest=best.pos.clone();
+	}
+}
+
+window.drawHistBest=function(){
+	drawPoint(ctx, mapVector(histBest), "#0000FF");
+}
+
+window.newMap=function(){
+	Fcenters=[	
+		new Vector(Math.random()*10-5,Math.random()*10-5), 
+		new Vector(Math.random()*10-5,Math.random()*10-5), 
+		new Vector(Math.random()*10-5,Math.random()*10-5),
+		new Vector(Math.random()*10-5,Math.random()*10-5), 
+		new Vector(Math.random()*10-5,Math.random()*10-5)
+	];
+	histMinCost=9999999;
+	particles=[];
+	ctx=document.getElementById("myCanvas").getContext('2d');
+	drawCost(ctx);
+	for(var i=0;i<particlesNum;i++){
+		particles.push(new Particle(ctx));
+		particles[i].draw();
+	}
+}
+
+window.next=function(){
+	drawPoint(ctx, drawCost(ctx), "#FFFFFF");
+	findBest();
+	for(id in particles){
+		particles[id].update(best.pos);
+		particles[id].draw();
+	}
+	drawHistBest();
+}
+
+$(document).ready(function(){
+	newMap();
+});
+
+
+</script>

@@ -9,7 +9,6 @@
 
   <script src="components/platform/platform.js"></script>
   <script src="jquery.min.js"></script>
-
   <link rel="import" href="components/core-item/core-item.html">
   <link rel="import" href="components/core-menu/core-menu.html">
   <link rel="import" href="components/core-header-panel/core-header-panel.html">
@@ -60,6 +59,10 @@
       width: 80%;
       text-align: right;
     }
+    img {
+      height: auto;
+      width: auto;
+    }
   </style>
 
 </head>
@@ -72,31 +75,33 @@
         <core-menu id="menu" selected="0">
         </core-menu>
       </div>
-      <div class="globalContainer">
+      <div class="globalContainer" >
         <core-toolbar>
           <div style="width:100%" layout horizontal center>
             <div layout horizontal center>
-              <core-icon-button icon="chevron-left" onclick="window.prev()"></core-icon-button>
+              <core-icon-button icon="chevron-left" onclick="window.polySlides.prev()"></core-icon-button>
               <p>polySlides</p>
-              <core-icon-button icon="chevron-right" onclick="window.next()"></core-icon-button>
+              <core-icon-button icon="chevron-right" onclick="window.polySlides.next()"></core-icon-button>
             </div>
             <div class="timebox" id="show_time">
               00:00:00
             </div>
           </div>
         </core-toolbar>
-        <div class="container" id="container" layout vertical center onclick="window.next()"></div>
+        <div class="container" id="container" layout vertical center ></div>
       </div>
     </div>
   </core-header-panel>
 
 
   <script>
-    window.ele=[];
-    window.counter=0;
-    window.max=0;
-    window.is_show_valid=true;
-    window.slideSpecialEffects=function(ele, delta, time, callback){
+    window.polySlides={};
+    window.polySlides.ele=[];
+    window.polySlides.nextSlideId=[];
+    window.polySlides.counter=-1;
+    window.polySlides.max=0;
+    window.polySlides.is_show_valid=true;
+    window.polySlides.slideSpecialEffects=function(ele, delta, time, callback){
       if(typeof ele=='undefined'){
         callback();
         return;
@@ -115,60 +120,85 @@
       ele.style.opacity=newValue;
       window.setTimeout(
         function(){
-          slideSpecialEffects(ele, delta, time, callback);
+          window.polySlides.slideSpecialEffects(ele, delta, time, callback);
         },
         time
       );
     }
-    window.show=function(id){
-      if(!is_show_valid) return;
-      is_show_valid=false;
-      counter=id;
+    window.polySlides.show=function(id){
+      if(!window.polySlides.is_show_valid) return;
+      window.polySlides.is_show_valid=false;
+      window.polySlides.counter=id;
       var body=document.querySelector("#container");
       var slide=body.childNodes[0];
 
-      slideSpecialEffects(slide, -0.1, 20, function(){ 
+      window.polySlides.slideSpecialEffects(slide, -0.1, 20, function(){ 
         body.innerHTML="";
-        body.appendChild(ele[id]); 
-        slideSpecialEffects(ele[id], 0.1, 20, function(){ 
+        body.appendChild(window.polySlides.ele[id]); 
+        window.polySlides.slideSpecialEffects(window.polySlides.ele[id], 0.1, 20, function(){ 
           document.querySelector("#menu").selected=id; 
-          is_show_valid=true;
+          body.setAttribute("onclick","window.polySlides.jump('"+window.polySlides.nextSlideId[id]+"')");
+          window.polySlides.is_show_valid=true;
         }); 
       });
 
     }
-    window.next=function(){
-      if(counter===max) return;
-      show(counter+1);
+
+    window.polySlides.jump=function(id_re){
+      var tmp=window.polySlides.counter;
+      if(typeof id_re=="string"){
+        if(id_re[0]=="=") return;
+        if((id_re[0]=="+") || (id_re[0]=="-")){
+          tmp+=eval(id_re);
+        }else{
+          tmp=eval(id_re);
+        }
+      }else{
+        tmp=id_re;
+      }
+      if(tmp<0) return;
+      if(tmp>=window.polySlides.max) return;
+      if(tmp==window.polySlides.counter) return;
+      window.polySlides.show(tmp);
     }
-    window.prev=function(){
-      if(counter===0) return;
-      show(counter-1);
+    window.polySlides.next=function(){
+      window.polySlides.jump("+1");
     }
-    window.getConfig=function(default_config, custom_config){
+    window.polySlides.prev=function(){
+      window.polySlides.jump("-1");
+    }
+    window.polySlides.getConfig=function(default_config, custom_config){
       var res={};
       for(i in default_config) res[i]=default_config[i];
       for(i in custom_config) res[i]=custom_config[i];
       return res;
     }
-    window.loadData=function(data){
+    window.polySlides.loadData=function(data){
 
       data=eval(data);
-      max=-1;
+      window.polySlides.max=-1;
       var menu=document.querySelector("#menu");
 
-      var global_config=getConfig({ background: "#FFFFFF", template: "default" },data[0]);
+      var global_config=window.polySlides.getConfig({ background: "#FFFFFF", template: "default", js: "", next:"+1" },data[0]);
       var local_config;
 
       for(var i=1;i<data.length;i++){ // foreach slide
 
         var title="";
-        local_config=getConfig(global_config, data[i][0]);
+        local_config=window.polySlides.getConfig(global_config, data[i][0]);
         var element=document.createElement("polyslides-"+local_config.template);
         element.style.opacity=0;
         element.style.background=local_config.background;
-        ele.push(element); 
+        window.polySlides.ele.push(element); 
+        window.polySlides.nextSlideId.push(local_config.next);
         var slideData=data[i][1];
+
+        if(local_config.js!=""){
+          var node=document.createElement("link");
+          node.rel="import";
+          node.href=local_config.js;
+          element.appendChild(node);
+        }
 
         for(j in slideData){ // foreach node in slide
           var nodeType="p";  // the default node type is "p"
@@ -182,36 +212,45 @@
           if(nodeType==="h1"){
             title=inner;
           }
-          var node=document.createElement(nodeType);
+          var node;
+          if(nodeType!="latex"){
+            node=document.createElement(nodeType!="iframe"?nodeType:"div");
+          }else{
+            node=document.createElement("p");
+            inner="$"+inner+"$";
+          }
           element.appendChild(node);
           if((nodeType!="img") && (nodeType !="iframe") && (nodeType !="a")){
             node.innerHTML=inner;
           }else{
-            node.src=inner;
+            if(nodeType=="iframe"){
+              $(node).load(inner);
+            }else{
+              node.src=inner;
+            }
           }
         }
 
         // update menu
         var slideItem=document.createElement("core-item");
         menu.appendChild(slideItem);
-        max+=1;
+        window.polySlides.max+=1;
         if(title.length>13) {
           title=title.substr(0,12)+"..";
         }
         slideItem.setAttribute("label",title);
-        slideItem.setAttribute("onclick","window.show("+max+")");
+        slideItem.setAttribute("onclick","window.polySlides.show("+window.polySlides.max+")");
 
       }
 
       // render the first slide
-      counter=0;
-      show(counter);
+      window.polySlides.jump(0);
 
     }
     
     $(document).ready(function(){
       $.get("slides/slides.json",function(data){
-        loadData(data);
+        window.polySlides.loadData(data);
       });
       window.setInterval(function(){
         var date=new Date();
