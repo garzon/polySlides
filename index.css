@@ -1,0 +1,43 @@
+.dark {
+  background-color: #333;
+  padding-right: 30px;
+}
+.dark core-item {
+  color: #fafafa;
+  fill: #fafafa;
+}
+html,body, .globalContainer {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: #E5E5E5;
+  font-family: 'Calibri', sans-serif;
+}
+core-header-panel {
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; 
+}
+core-toolbar {
+  background: #03a9f4;
+  color: white;
+}
+.container {
+  width: 80%;
+  height: 80%;
+  margin: 50px auto;
+}
+@media (min-width: 481px) {
+  .container {
+    width: 400px;
+    height: 100%;
+  }
+}
+.timebox {
+  width: 80%;
+  text-align: right;
+}
+img {
+  height: auto;
+  width: auto;
+}
