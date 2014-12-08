@@ -42,11 +42,19 @@ function drawCost(ctx){
 			var ny=map(y,0,h,bound_y[0],bound_y[1]);
 			var val=cost(new Vector(nx,ny));
 			val=Math.round(map(val,fmin,fmax,0,255));
-			pix[i  ] = val;
-			pix[++i] = 255-val;
-			pix[++i] = 0;
-			pix[++i] = 255;
-			pix[++i] = 255;
+			if(val%30!=0){
+				pix[i  ] = val;
+				pix[++i] = 255-val;
+				pix[++i] = 0;
+				pix[++i] = 255;
+				pix[++i] = 255;
+			}else{
+				pix[i  ] = 0;
+				pix[++i] = 0;
+				pix[++i] = 0;
+				pix[++i] = 255;
+				pix[++i] = 255;
+			}
 		}
 	}
 	ctx.putImageData(imgPixels, 0, 0);

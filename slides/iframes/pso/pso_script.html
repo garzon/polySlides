@@ -55,6 +55,7 @@ window.findBest=function(){
 
 window.drawHistBest=function(){
 	drawPoint(ctx, mapVector(histBest), "#0000FF");
+	drawPoint(ctx, mapVector(best.pos), "#FFFF00");
 }
 
 window.newMap=function(){
@@ -73,15 +74,16 @@ window.newMap=function(){
 		particles.push(new Particle(ctx));
 		particles[i].draw();
 	}
+	findBest();
 }
 
 window.next=function(){
 	drawPoint(ctx, drawCost(ctx), "#FFFFFF");
-	findBest();
 	for(id in particles){
 		particles[id].update(best.pos);
 		particles[id].draw();
 	}
+	findBest();
 	drawHistBest();
 }
 

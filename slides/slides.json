@@ -9,6 +9,9 @@
         { "template": "cover" },
         [
             ["h1","Tracking the Articulated Motion of Hands"],
+            ["Tracking the Articulated Motion of Two Strongly Interacting Hands"],
+            ["CVPR2012"],
+            [""],
             ["Garzon Ou"],
             ["13307130320@fudan.edu.cn"],
             ["Fudan University"]
@@ -29,7 +32,8 @@
         [
             ["h1","Data"],
             ["RGB-D Image"],
-            ["img","slides/images/RGBD.jpg"]
+            ["img","slides/images/RGBD.jpg"],
+            ["A. A. Argyros and M. Lourakis. Real-time Tracking of Multiple Skin-colored Objects with a Possibly Moving Camera.In ECCV, pages 368–379. Springer, 2004."]
         ]
     ],
 
@@ -68,7 +72,7 @@
             ["h1","Formula of PSO"],
             ["img","slides/images/PSO_formula.jpg"],
             ["Same as"],
-            ["img","slides/images/PSO_avp.gif"]
+            ["img","slides/images/PSO_avp.png"]
         ]
     ],  
 
@@ -83,21 +87,29 @@
     [
         {},
         [
-            ["h1","ICP (Iterative Closest Point)"]
+            ["h1","ICP (Iterative Closest Point)"],
+            ["img","slides/images/ICP_trans.png"],
+            ["Gradient descent"],
+            ["img","slides/images/ICP_formula.png"],
+            ["Note that the point correspondence may be changed in the iteration."]
         ]
     ],
 
     [
         {},
         [
-            ["h1","Transform Matrix"]
+            ["h1","Transform Matrix and Articulated Model"],
+            ["img","slides/images/ICP_transMat.png"],
+            ["img","slides/images/AICP_mat.png"]
         ]
     ],  
 
     [
         {},
         [
-            ["h1","AICP (Articulated ICP)"]
+            ["h1","AICP (Articulated ICP)"],
+            ["img","slides/images/AICP_formula.jpg"],
+            ["img","slides/images/AICP.jpg"]
         ]
     ],  
 
