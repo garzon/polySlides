@@ -94,10 +94,10 @@ And the structure of config (`global_config` and `local_config`) is
 
 - ```NEXT_SLIDE```: decides the slide which is to be showed when you click on the slide:   
 - ```NEXT_SLIDE```: 决定点击后跳转到哪张幻灯片:   
-- - ```+X```: jump to the X-th slide next to the current one. 跳转到现在后面的第X张幻灯片
-- - ```-X```: jump to the X-th slide previous to the current one. 跳转到现在前面的第X张幻灯片
-- - ```=```: nothing happened when you click. It is useful when you want to put a button on the slide and when you click the button, it will not jump to the next slide. 点击时不跳转.通常用于在幻灯片上放置button时，点击将不会跳转
-- - ```X```: jump to the X-th slide (index start from 0). 跳转到第X张幻灯片，幻灯片的编号X从0开始编号
+- -> ```+X```: jump to the X-th slide next to the current one. 跳转到现在后面的第X张幻灯片
+- -> ```-X```: jump to the X-th slide previous to the current one. 跳转到现在前面的第X张幻灯片
+- -> ```=```: nothing happened when you click. It is useful when you want to put a button on the slide and when you click the button, it will not jump to the next slide. 点击时不跳转.通常用于在幻灯片上放置button时，点击将不会跳转
+- -> ```X```: jump to the X-th slide (index start from 0). 跳转到第X张幻灯片，幻灯片的编号X从0开始编号
 
 默认选项在文件*polySlides_defaultConfig.js*里定义为：   
 The default config is defined in *polySlides_defaultConfig.js* as   
