@@ -11,11 +11,22 @@ window.polySlides.defaultConfig={
 
 window.polySlides.tagMap={
 	"iframe": "div",
-	"latex": "div"
+	"latex": "div",
+	"b": "p"
 };
 
 window.polySlides.handlers={
-	"setHref": function(node, inner){ node.href=inner; },
+	"setLink": function(node, inner){ 
+		node.href=inner; 
+		node.innerHTML=inner;
+	},
+	"setBold": function(node, inner){ 
+		var b=document.createElement("b");
+		b.innerHTML=inner;
+		var p=document.createElement("p");
+		p.appendChild(b);
+		node.appendChild(p);
+	},
 	"setSrc": function(node, inner){ node.src=inner; },
 	"setMyIframe": function(node, inner){ $(node).load(inner); },
 	"addLaTeX": function(node, inner){ 
@@ -26,7 +37,8 @@ window.polySlides.handlers={
 };
 
 window.polySlides.innerHandlerName={
-	"a": "setHref",
+	"a": "setLink",
+	"b": "setBold",
 	"img": "setSrc",
 	"iframe": "setMyIframe",
 	"latex": "addLaTeX"
