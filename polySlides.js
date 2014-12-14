@@ -117,7 +117,7 @@ window.polySlides.loadNode=function(element, nodeType, inner){
 
   if(typeof window.polySlides.innerHandlerName[nodeType] != "undefined"){
     // inner may be the other attribute of node, like .src, rather than .innerHTML
-    inner=window.polySlides.handlers[window.polySlides.innerHandlerName[nodeType]](node, inner);
+    window.polySlides.handlers[window.polySlides.innerHandlerName[nodeType]](node, inner);
   }else{
     // inner is .innerHTML attribute or another (recursive) "nodes"
     if(typeof inner=="string"){

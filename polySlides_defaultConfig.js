@@ -13,7 +13,7 @@ window.polySlides.tagMap={
 	"iframe": "div",
 	"latex": "div",
 	"b": "p"
-};
+};  // defines the real type of HTML tag of some custom TAG_NAME like "latex"
 
 window.polySlides.handlers={
 	"setLink": function(node, inner){ 
@@ -23,9 +23,7 @@ window.polySlides.handlers={
 	"setBold": function(node, inner){ 
 		var b=document.createElement("b");
 		b.innerHTML=inner;
-		var p=document.createElement("p");
-		p.appendChild(b);
-		node.appendChild(p);
+		node.appendChild(b);
 	},
 	"setSrc": function(node, inner){ node.src=inner; },
 	"setMyIframe": function(node, inner){ $(node).load(inner); },
@@ -34,7 +32,7 @@ window.polySlides.handlers={
 		img.src="http://latex.codecogs.com/png.latex?"+inner;
 		node.appendChild(img);
 	}
-};
+};  // defines the handler which is called to set the attribute of the created html tag(node)
 
 window.polySlides.innerHandlerName={
 	"a": "setLink",
@@ -42,4 +40,4 @@ window.polySlides.innerHandlerName={
 	"img": "setSrc",
 	"iframe": "setMyIframe",
 	"latex": "addLaTeX"
-};
+};  // defines the handler which is needed to be called to set the node

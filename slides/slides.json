@@ -28,7 +28,8 @@
         { "background": "#FFFFFF" },
         [
             ["h1","Slide2"],
-            ["No background image here"]
+            ["No background image here"],
+            ["b","bold test"]
         ]
     ]
 
