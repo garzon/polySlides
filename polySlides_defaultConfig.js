@@ -2,11 +2,13 @@
  * @author Garzon Ou
  */
 
+window.polySlides.defaultNodeType="p";
+
 window.polySlides.defaultConfig={ 
 	"background": "#FFFFFF", 
 	"template": "default", 
 	"js": "", 
-	"next":"+1",
+	"next":"+1"
 };
 
 window.polySlides.tagMap={

@@ -10,6 +10,14 @@ polySlides - 一个只需要写一个json文件就能帮你制作HTML5演示文�
 - 只需要写一个简单的json，无需机械重复排版，快速创建幻灯片，更关注内容
 - 可随时灵活地自定义自己需要的幻灯片模板
 
+### Start
+
+Start a HTTP server in the directory, example:
+
+```$ python -m SimpleHTTPServer```
+
+and open ```localhost:8000``` in the browser
+
 ### Demo
 
 <a href="http://garzon.github.io/polySlides/">http://garzon.github.io/polySlides</a>

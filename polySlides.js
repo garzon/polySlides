@@ -108,30 +108,38 @@ window.polySlides.createSlide=function(local_config){
 window.polySlides.loadNode=function(element, nodeType, inner){
   var node;
   if(typeof window.polySlides.tagMap[nodeType] != "undefined"){
+    // nodeType may be a custom TAG_NAME like "latex",
+    // just call handler defined in polySlides_defaultConfig.js to handle
     node=window.polySlides.tagMap[nodeType];
   }else{
+    // nodeType is the same as the HTML tag name
     node=nodeType;
   }
+
   node=document.createElement(node);
-  element.appendChild(node);
+  element.appendChild(node); // element is a slide or "subnodes"
 
   if(typeof window.polySlides.innerHandlerName[nodeType] != "undefined"){
-    // inner may be the other attribute of node, like .src, rather than .innerHTML
+    // INNER may be other attribute of node, like .src, rather than .innerHTML, 
+    // so call handler defined in polySlides_defaultConfig.js to handle
     window.polySlides.handlers[window.polySlides.innerHandlerName[nodeType]](node, inner);
   }else{
-    // inner is .innerHTML attribute or another (recursive) "nodes"
     if(typeof inner=="string"){
+      // INNER is .innerHTML attribute
       node.innerHTML=inner;
     }else{
+      // INNER is "subnodes"
       window.polySlides.loadNodes(node, inner);
+      // recursive function calls
     }
   }
 };
 
 window.polySlides.loadNodes=function(element, slideData){
   var title="";
-  for(var j in slideData){ // foreach node in slide
-    var nodeType="p";  // the default node type is "p"
+  for(var j in slideData){ // foreach node in a slide/"subnodes"
+    var nodeType=window.polySlides.defaultNodeType;  
+    // the default node type is defined in polySlides_defaultConfig.js, default is "p"
     var inner;
     if(slideData[j].length!==1){
       nodeType=slideData[j][0];
@@ -140,11 +148,11 @@ window.polySlides.loadNodes=function(element, slideData){
       inner=slideData[j][0];
     }
     if(nodeType==="h1"){
-      title=inner;
+      title=inner; // set the slide title
     }
     window.polySlides.loadNode(element, nodeType, inner);
   }
-  return title;
+  return title; // return title to loadData() to set the menu
 };
 
 window.polySlides.pushSlideMenu=function(id,title){
@@ -183,9 +191,11 @@ window.polySlides.loadData=function(data){
 };
 
 $(document).ready(function(){
+
   $.get("slides/slides.json",function(data){
     window.polySlides.loadData(data);
-  });
+  }); // load data
+
   window.setInterval(function(){
     var date=new Date();
     var trim=function(t){
@@ -193,5 +203,6 @@ $(document).ready(function(){
       return t;
     }
     document.getElementById("show_time").innerHTML=trim(date.getHours())+":"+trim(date.getMinutes())+":"+trim(date.getSeconds());
-  },1000);
+  },1000); // show the time
+
 });
