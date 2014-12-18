@@ -20,16 +20,34 @@
         {},
         [
             ["h1", "Slide1"],
-            ["A default slide"]
+            ["A default slide, test LaTex:"],
+            ["latex","E_k=\\Delta mc^2"]
         ]
     ],
 
     [
-        { "background": "#FFFFFF" },
+        { "autoplay": "2000" },
+        [
+            ["h1","test autoplay"],
+            ["jump to next slide in 2s..."]
+        ]
+    ],
+
+    [
+        { "background": "#FFFFFF", "autoplay": "1000" },
+        [
+            ["h1","test autoplay2"],
+            ["jump to next slide again in 1s..."]
+        ]
+    ],
+
+    [
+        { "background": "#FFFFFF", "autoplay": "3000" },
         [
             ["h1","Slide2"],
             ["No background image here"],
-            ["b","bold test"]
+            ["b","bold test"],
+            ["no autoplay in the last slide"]
         ]
     ]
 

@@ -2,11 +2,37 @@
  * @author Garzon Ou
  */
 
-window.polySlides.ele=[];
-window.polySlides.nextSlideId=[];
-window.polySlides.counter=-1;
-window.polySlides.max=0;
-window.polySlides.is_show_valid=true;
+ window.polySlides.loadData=function(data){
+
+  window.polySlides.ele=[];
+  window.polySlides.nextSlideId=[];
+  window.polySlides.autoplay=[];
+  window.polySlides.counter=-1;
+  window.polySlides.max=0;
+  window.polySlides.is_show_valid=true;
+  window.polySlides.autoplay_flag=false;
+
+  data=eval(data);
+  window.polySlides.max=-1;
+
+  var global_config=window.polySlides.getConfig(window.polySlides.defaultConfig,data[0]);
+
+  for(var i=1;i<data.length;i++){ // foreach slide
+
+    window.polySlides.max+=1;
+
+    var local_config=window.polySlides.getConfig(global_config, data[i][0]);
+    var element=window.polySlides.createSlide(local_config);
+    var slideData=data[i][1];
+    var title=window.polySlides.loadNodes(element, slideData);
+    window.polySlides.pushSlideMenu(window.polySlides.max,title);
+
+  }
+
+  // render the first slide
+  window.polySlides.jump(0);
+
+};
 
 window.polySlides.slideSpecialEffects=function(ele, delta, time, callback){
   if(typeof ele=='undefined'){
@@ -35,17 +61,31 @@ window.polySlides.slideSpecialEffects=function(ele, delta, time, callback){
 
 window.polySlides.show=function(id){
   if(!window.polySlides.is_show_valid) return;
+  window.polySlides.autoplay_flag=false;
   window.polySlides.is_show_valid=false;
   window.polySlides.counter=id;
-  var body=document.querySelector("#container");
+  var body=document.getElementById("container");
   var slide=body.childNodes[0];
 
   window.polySlides.slideSpecialEffects(slide, -0.1, 20, function(){ 
     body.innerHTML="";
     body.appendChild(window.polySlides.ele[id]); 
     window.polySlides.slideSpecialEffects(window.polySlides.ele[id], 0.1, 20, function(){ 
-      document.querySelector("#menu").selected=id; 
+      document.getElementById("menu").selected=id; 
       body.setAttribute("onclick","window.polySlides.jump('"+window.polySlides.nextSlideId[id]+"')");
+      if(window.polySlides.autoplay[id]!=0){
+        window.polySlides.autoplay_flag=true;
+        window.setTimeout(
+          function(id){ 
+            return function(){
+              if(window.polySlides.autoplay_flag){
+                window.polySlides.jump(window.polySlides.nextSlideId[id]);
+              }
+            };
+          }(id) , 
+          Number(window.polySlides.autoplay[id])
+        );
+      }
       window.polySlides.is_show_valid=true;
     }); 
   });
@@ -57,9 +97,9 @@ window.polySlides.jump=function(id_re){
   if(typeof id_re=="string"){
     if(id_re[0]=="=") return;
     if((id_re[0]=="+") || (id_re[0]=="-")){
-      tmp+=eval(id_re);
+      tmp+=Number(id_re);
     }else{
-      tmp=eval(id_re);
+      tmp=Number(id_re);
     }
   }else{
     tmp=id_re;
@@ -94,6 +134,7 @@ window.polySlides.createSlide=function(local_config){
 
   // set the attributes in the local_config
   element.style.background=local_config.background;
+  window.polySlides.autoplay.push(local_config.autoplay);
   window.polySlides.nextSlideId.push(local_config.next);
   if(local_config.js!=""){
     var node=document.createElement("link");
@@ -157,37 +198,13 @@ window.polySlides.loadNodes=function(element, slideData){
 
 window.polySlides.pushSlideMenu=function(id,title){
   var slideItem=document.createElement("core-item");
-  var menu=document.querySelector("#menu");
+  var menu=document.getElementById("menu");
   menu.appendChild(slideItem);
   if(title.length>13) {
     title=title.substr(0,12)+"..";
   }
   slideItem.setAttribute("label",title);
   slideItem.setAttribute("onclick","window.polySlides.show("+id+")");
-};
-
-window.polySlides.loadData=function(data){
-
-  data=eval(data);
-  window.polySlides.max=-1;
-
-  var global_config=window.polySlides.getConfig(window.polySlides.defaultConfig,data[0]);
-
-  for(var i=1;i<data.length;i++){ // foreach slide
-
-    window.polySlides.max+=1;
-
-    var local_config=window.polySlides.getConfig(global_config, data[i][0]);
-    var element=window.polySlides.createSlide(local_config);
-    var slideData=data[i][1];
-    var title=window.polySlides.loadNodes(element, slideData);
-    window.polySlides.pushSlideMenu(window.polySlides.max,title);
-
-  }
-
-  // render the first slide
-  window.polySlides.jump(0);
-
 };
 
 $(document).ready(function(){
