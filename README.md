@@ -1,14 +1,19 @@
-polySlides
+polySlides V1.0 Beta
 ==========
 
-polySlides - A tool helps you to make HTML slides - just need to write a JSON file   
 polySlides - 一个只需要写一个json文件就能帮你制作HTML5演示文档的工具框架
+polySlides - A tool helps you to make HTML slides - just need to write a JSON file   
+
+### Demo
+
+<a href="http://garzon.github.io/polySlides/">http://garzon.github.io/polySlides</a>
 
 ### Features - 特色
 
 - 基于HTML5，polymer框架，方便内嵌HTML+JS
-- 只需要写一个简单的json，无需机械重复排版，快速创建幻灯片，更关注内容
+- 只需要写一个简单的json，无需机械重复排版，快速创建幻灯片，可使制作人更关注于内容
 - 可随时灵活地自定义自己需要的幻灯片模板(基于polymer)
+- 支持autoplay，自定义幻灯片跳转顺序等
 
 ### Start
 
@@ -21,10 +26,6 @@ and open ```localhost:8000``` in the browser.
 
 Or you can put it on github.io    
 或者放在github.io上在线放映
-
-### Demo
-
-<a href="http://garzon.github.io/polySlides/">http://garzon.github.io/polySlides</a>
 
 ## Tutorial
 
@@ -98,6 +99,7 @@ And the structure of config (`global_config` and `local_config`) is
 	"background": BACKGROUND,
    "js": JS_PATH, 
    "next": NEXT_SLIDE,
+   "autoplay": DELAY_TIME
 }
 ```
 
@@ -115,6 +117,9 @@ And the structure of config (`global_config` and `local_config`) is
 - -> ```=```: nothing happened when you click. It is useful when you want to put a button on the slide and when you click the button, it will not jump to the next slide. 点击时不跳转.通常用于在幻灯片上放置button时，点击将不会跳转
 - -> ```X```: jump to the X-th slide (index start from 0). 跳转到第X张幻灯片，幻灯片的编号X从0开始编号
 
+- ```DELAY_TIME```: After `DELAY_TIME`(milliseconds), automatically jump to the `NEXT_SLIDE`. To disable, just set to "0".
+- ```DELAY_TIME```: 经过`DELAY_TIME`(毫秒)后, 自动跳转到`NEXT_SLIDE`指定的幻灯片。此项设为0则关闭自动跳转功能。适宜用来做相册功能。
+
 默认选项在文件*polySlides_defaultConfig.js*里定义为：   
 The default config is defined in *polySlides_defaultConfig.js* as   
 ```
@@ -123,8 +128,13 @@ window.polySlides.defaultConfig={
    "template": "default", 
    "js": "", 
    "next":"+1",
+   "autoplay":"0"
 };
 ```
 
 You can just leave a "{}" at global_config or local_config if you want to set local/global_config to defaultConfig.   
 留空即可使用上一级的设置，也就是设置会被继承。
+
+### Log
+
+- V1.0 Beta: +autoplay
