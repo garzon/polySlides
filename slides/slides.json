@@ -9,8 +9,6 @@
         { "template": "cover" },
         [
             ["h1","Tracking the Articulated Motion of Hands"],
-            ["Tracking the Articulated Motion of Two Strongly Interacting Hands"],
-            ["CVPR2012"],
             [""],
             ["Garzon Ou"],
             ["13307130320@fudan.edu.cn"],
@@ -21,37 +19,9 @@
     [
         {},
         [
-            ["h1", "Problem"],
-            ["Tracking"],
-            ["img","slides/images/Tracking.jpg"]
-        ]
-    ],
-
-    [
-        {},
-        [
-            ["h1","Data"],
-            ["RGB-D Image"],
-            ["img","slides/images/RGBD.jpg"],
-            ["A. A. Argyros and M. Lourakis. Real-time Tracking of Multiple Skin-colored Objects with a Possibly Moving Camera.In ECCV, pages 368–379. Springer, 2004."]
-        ]
-    ],
-
-    [
-        {},
-        [
             ["h1","Model"],
             ["img","slides/images/Model.jpg"],
             ["Each part of the model corresponding to some spheres in the same color"]
-        ]
-    ],
-
-    [
-        {},
-        [
-            ["h1","Cost Function"],
-            ["img","slides/images/Cost.jpg"],
-            ["where   o: observation,  r: rendered image,  s: skin map,  d: depth map"]
         ]
     ],
 
@@ -69,10 +39,12 @@
     [
         {},
         [
-            ["h1","Formula of PSO"],
-            ["img","slides/images/PSO_formula.jpg"],
-            ["Same as"],
-            ["img","slides/images/PSO_avp.png"]
+            ["h1","Formula of PrPSO"],
+            ["img","slides/images/new_pso_formula.png"],
+            ["Adaptive Coordination of Confidence Coefficients"],
+            ["img","slides/images/new_pso_params.png"],
+            ["Partial Randomization"],
+            ["img","slides/images/new_pso_randomization.png"]
         ]
     ],  
 
@@ -87,50 +59,18 @@
     [
         {},
         [
-            ["h1","ICP (Iterative Closest Point)"],
-            ["img","slides/images/ICP_trans.png"],
-            ["Gradient descent"],
-            ["img","slides/images/ICP_formula.png"],
-            ["Note that the point correspondence may be changed in the iteration."]
-        ]
-    ],
-
-    [
-        {},
-        [
-            ["h1","Transform Matrix and Articulated Model"],
-            ["img","slides/images/ICP_transMat.png"],
-            ["img","slides/images/AICP_mat.png"]
-        ]
-    ],  
-
-    [
-        {},
-        [
-            ["h1","AICP (Articulated ICP)"],
-            ["img","slides/images/AICP_formula.jpg"],
-            ["img","slides/images/AICP.jpg"]
-        ]
-    ],  
-
-    [
-        {},
-        [
             ["h1","Sketch"],
             ["img","slides/images/Sketch.jpg"]
         ]
     ],  
 
-
-
     [
-        { "background": "#FFFFFF" },
+        {},
         [
-            ["h1","References"],
-            ["I. Oikonomidis, N. Kyriazis, A.A. Argyros. Tracking the Articulated Motion of Two Strongly Interacting Hands. CVPR2012"],
-            ["Chen Qian, et al. Realtime and Robust Hand Tracking from Depth. CVPR2014"],
-            ["I.Oikonomidis, N.Kyriazis, and A.A.Argyros. Efficient model-based tracking of hand articulations using kinect. In BMVC, 2011."],
-            ["S. Pellegrini, K. Schindler, and D. Nardi. A generalisation of the icp algorithm for articulated bodies. In BMVC, 2008."]
+            ["h1", "3D Projection"],
+            ["Given a set of the coordinates of points in 3D (R^3) space, the 3D projection problem asks what the coordinates of these points in a projection plane are."],
+            [""],
+            ["img","slides/images/3d1.png"]
         ]
     ]
 
